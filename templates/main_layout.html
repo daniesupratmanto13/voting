@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+          
+        {% endblock title %}
+    </title>
+
+    {% include "snippets/style.html" %}
+
+    {% block early_script %}
+      
+    {% endblock early_script %}
+</head>
+<body>
+    
+    <div class="container">
+    {% include "snippets/navbar.html" %}
+    {% block content %}
+      
+    {% endblock content %}
+    </div>
+
+    {% include "snippets/script.html" %}
+
+    {% block end_script %}
+      
+    {% endblock end_script %}
+</body>
+</html>

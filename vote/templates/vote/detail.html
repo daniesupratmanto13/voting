@@ -1,0 +1,41 @@
+{% extends "main_layout.html" %}
+
+{% block title %}
+    detail
+{% endblock title %}
+
+{% block content %}
+    <h3 class="text-center mb-5 mt-3">Detail Vote</h3>
+    <h4 class="text-center m-4">{{ question.question_title }}</h4>
+
+    
+    {% if user not in question.voted.all %}
+    
+        <form action="{% url 'vote:vote' question.id %}" method="POST">
+            {% csrf_token %}
+            
+            {% for choice in question.choicemodel_set.all %}
+            <div class="form-check">
+                <input
+                    type="radio"
+                    name="choice"
+                    class="form-check-input"
+                    id="choice{{ forloop.counter }}"
+                    value="{{ choice.id }}"
+                />
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_title }}</label
+                >
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </form>
+            
+    {% else %}
+    
+        <h3 class="text-center badge-danger">You have voted</h3>
+
+    {% endif %}
+        
+
+    <a href="{% url 'vote:index' %}" class="btn btn-outline-dark">Back</a>
+{% endblock content %}
